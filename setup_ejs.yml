@@ -13,7 +13,7 @@
     #     gpgcheck: yes
     #     gpgkey: https://rpm.nodesource.com/pub_14.x/el/8/x86_64/RPM-GPG-KEY-nodesource
     #   register: repo_result
-    - name: "dnf update".                    # this works
+    - name: "dnf update"                 # this works
       ansible.builtin.shell: 'dnf update *'
       become: true
 
