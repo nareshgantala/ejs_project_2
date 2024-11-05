@@ -1,8 +1,8 @@
 - name: setup ejs on ec2 
   hosts: localhost
   become: yes
-  vars:
-    ansible_pkg_mgr: dnf
+  # vars:
+  #   ansible_pkg_mgr: dnf
   tasks:
     # - name: Add NodeSource repository for Node.js
     #   dnf_repository:
@@ -13,12 +13,15 @@
     #     gpgcheck: yes
     #     gpgkey: https://rpm.nodesource.com/pub_14.x/el/8/x86_64/RPM-GPG-KEY-nodesource
     #   register: repo_result
+    - name: "dnf update".                    # this works
+      ansible.builtin.shell: 'dnf update *'
+      become: true
 
     - name: install node.js
       dnf:
         name: nodejs
         state: present
-      when: ansible_pkg_mgr == 'dnf'
+      # when: ansible_pkg_mgr == 'dnf'
 
     # - name: Create a project directory if it does not exist
     #   ansible.builtin.file:
