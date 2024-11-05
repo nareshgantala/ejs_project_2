@@ -61,17 +61,17 @@
     #     dest: /home/centos/ejs_project/views/index.ejs
 
 
-    - name: Create systemd service for the Node.js application
-      ansible.builtin.copy:
-        src: /home/centos/ejs_project_1/ejs_project.service
-        dest: /etc/systemd/system/ejs_project.service
+    # - name: Create systemd service for the Node.js application
+    #   ansible.builtin.copy:
+    #     src: /home/centos/ejs_project_1/ejs_project.service
+    #     dest: /etc/systemd/system/ejs_project.service
 
-    - name: Reload systemd to apply the new service
-      ansible.builtin.systemd:
-        daemon_reload: yes
+    # - name: Reload systemd to apply the new service
+    #   ansible.builtin.systemd:
+    #     daemon_reload: yes
 
-    - name: Enable and start the Node.js application service
-      ansible.builtin.systemd:
-        name: ejs_project
-        enabled: yes
-        state: started
+    # - name: Enable and start the Node.js application service
+    #   ansible.builtin.systemd:
+    #     name: ejs_project
+    #     enabled: yes
+    #     state: started
