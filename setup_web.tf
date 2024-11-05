@@ -16,8 +16,8 @@ output "instance_public_ip" {
 resource "null_resource" "docker_setup" {
   provisioner "local-exec" {
     command = <<-EOF
-      docker build -t my-node-app .
-      docker run -d -p 3000:3000 my-node-app
+      docker build -t my-node-app-4 .
+      docker run -d -p 3000:3000 my-node-app-4
     EOF
   }
 

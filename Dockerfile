@@ -25,5 +25,11 @@ COPY ejs_project.service /home/centos/ejs_project_2/ejs_project.service
 
 # Run Ansible playbook to set up the application (if you're using this as a build step)
 # CMD executes this playbook within the container
-CMD ["ansible-playbook", "-i", "localhost,", "-c", "local", "/home/centos/ejs_project_2/setup_ejs.yml"]
+RUN "ansible-playbook", "-i", "localhost,", "-c", "local", "/home/centos/ejs_project_2/setup_ejs.yml"
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "app.js"]
 
