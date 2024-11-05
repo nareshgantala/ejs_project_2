@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: install node.js
-      dnf:
+      dnf4:
         name: nodejs
         state: present
         update_cache: yes
