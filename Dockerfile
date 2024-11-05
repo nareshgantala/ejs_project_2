@@ -2,7 +2,7 @@
 FROM centos:8
 
 # Install Python 3 and pip
-RUN yum install -y python3 
+RUN dnf install -y python38
 
 
 # Install Ansible via pip
