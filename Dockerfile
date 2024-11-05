@@ -2,9 +2,8 @@
 FROM centos:latest
 
 # Install EPEL repository and Ansible
-RUN yum -y install epel-release && \
-    yum -y install ansible && \
-    yum clean all
+RUN yum install python3.12-devel python3.12-pip -y && \
+pip3.12 install ansible ansible-core==2.16 botocore boto3 python-jenkins
 
 # Set the working directory for the playbook
 WORKDIR /home/centos/ejs_project_2
@@ -17,5 +16,5 @@ COPY ejs_project.service /home/centos/ejs_project_2/ejs_project.service
 
 # Run Ansible playbook to set up the application (if you're using this as a build step)
 # CMD executes this playbook within the container
-CMD ["ansible-playbook", "-i", "localhost,", "-c", "local", "/home/centos/ejs_project_2/setup_ejs.yml"]
+CMD ["ansible-playbook", "-i", "localhost,", "-c", "local", "/home/centos/ejs_project/setup_ejs.yml"]
 
