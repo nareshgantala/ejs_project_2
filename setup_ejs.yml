@@ -4,11 +4,21 @@
   vars:
     ansible_pkg_mgr: dnf
   tasks:
+    - name: Add NodeSource repository for Node.js
+      dnf_repository:
+        name: nodesource
+        description: Node.js Packages for Enterprise Linux 8
+        baseurl: https://rpm.nodesource.com/pub_14.x/el/8/x86_64/
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://rpm.nodesource.com/pub_14.x/el/8/x86_64/RPM-GPG-KEY-nodesource
+      register: repo_result
+
     - name: install node.js
       dnf:
         name: nodejs
         state: present
-        update_cache: yes
+      when: repo_result.changed
 
     # - name: Create a project directory if it does not exist
     #   ansible.builtin.file:
