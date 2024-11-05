@@ -1,8 +1,8 @@
 - name: setup ejs on ec2 
   hosts: localhost
   become: yes
-  vars:
-  ansible_pkg_mgr: apt
+  # vars:
+  # ansible_pkg_mgr: apt
   tasks:
     - name: install node.js
       dnf:
