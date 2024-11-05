@@ -1,21 +1,21 @@
-# Use an official Node.js runtime as the base image
-FROM node:16
+# Use a base image that supports Ansible installation
+FROM centos:latest
 
-# Set the working directory in the container
+# Install EPEL repository and Ansible
+RUN yum -y install epel-release && \
+    yum -y install ansible && \
+    yum clean all
+
+# Set the working directory for the playbook
 WORKDIR /home/centos/ejs_project_2
 
-# Copy the application files to the container
+# Copy the Ansible playbook and any required files into the container
+COPY setup_ejs.yml /home/centos/ejs_project_2/setup_ejs.yml
 COPY app.js /home/centos/ejs_project_2/app.js
 COPY views /home/centos/ejs_project_2/views
+COPY ejs_project.service /home/centos/ejs_project_2/ejs_project.service
 
-# Install Express and EJS dependencies
-RUN npm install express ejs
+# Run Ansible playbook to set up the application (if you're using this as a build step)
+# CMD executes this playbook within the container
+CMD ["ansible-playbook", "-i", "localhost,", "-c", "local", "/home/centos/ejs_project_2/setup_ejs.yml"]
 
-# Expose port 3000 for the app
-EXPOSE 3000
-
-# Set the environment variable for the port
-ENV PORT=3000
-
-# Command to run the application
-CMD ["node", "app.js"]

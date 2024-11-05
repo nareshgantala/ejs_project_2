@@ -1,0 +1,54 @@
+- name: setup ejs on ec2 
+  hosts: all
+  become: yes
+  tasks:
+    - name: install node.js
+      ansible.builtin.dnf:
+        name: nodejs
+        state: present
+
+    - name: Create a project directory if it does not exist
+      ansible.builtin.file:
+        path: /home/centos/ejs_project
+        state: directory
+        mode: u+rwx,g+rwx,o+rwx
+
+    - name: Install Express and EJS
+      npm:
+        name: "{{ item }}"
+        path: /home/centos/ejs_project
+      loop:
+        - express
+        - ejs
+
+    - name: Create app.js file
+      ansible.builtin.copy:
+        src: /home/centos/ejs_project_1/app.js
+        dest: /home/centos/ejs_project/app.js
+
+
+    - name: Create views directory
+      ansible.builtin.file:
+        path: /home/centos/ejs_project/views
+        state: directory
+
+    - name: Create index.ejs file
+      ansible.builtin.copy:
+        src: /home/centos/ejs_project_1/index.ejs
+        dest: /home/centos/ejs_project/views/index.ejs
+
+
+    - name: Create systemd service for the Node.js application
+      ansible.builtin.copy:
+        src: /home/centos/ejs_project_1/ejs_project.service
+        dest: /etc/systemd/system/ejs_project.service
+
+    - name: Reload systemd to apply the new service
+      ansible.builtin.systemd:
+        daemon_reload: yes
+
+    - name: Enable and start the Node.js application service
+      ansible.builtin.systemd:
+        name: ejs_project
+        enabled: yes
+        state: started
