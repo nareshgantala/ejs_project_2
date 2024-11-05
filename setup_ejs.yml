@@ -2,7 +2,7 @@
   hosts: localhost
   become: yes
   vars:
-  ansible_pkg_mgr: dnf
+    ansible_pkg_mgr: dnf
   tasks:
     - name: install node.js
       dnf:
