@@ -1,5 +1,13 @@
 # Use a base image that supports Ansible installation
-FROM ansible/ansible:default
+FROM centos:8
+
+# Install Python 3 and pip
+RUN yum install -y python3 && \
+    yum clean all
+
+# Install Ansible via pip
+RUN python3 -m ensurepip --upgrade && \
+    pip3 install --no-cache-dir ansible
 
 # Verify Ansible installation (optional, for debugging)
 RUN ansible --version
