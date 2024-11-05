@@ -14,7 +14,7 @@
     #     gpgkey: https://rpm.nodesource.com/pub_14.x/el/8/x86_64/RPM-GPG-KEY-nodesource
     #   register: repo_result
     - name: "dnf update"                 # this works
-      ansible.builtin.shell: 'dnf update *'
+      ansible.builtin.shell: dnf update all -y
       become: true
 
     - name: install node.js
