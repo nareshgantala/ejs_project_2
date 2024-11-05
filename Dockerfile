@@ -2,12 +2,12 @@
 FROM centos:8
 
 # Install Python 3 and pip
-RUN dnf install -y python38
+RUN sudo dnf install -y python38
 
 
 # Install Ansible via pip
-RUN python3 -m ensurepip --upgrade && \
-    pip3 install --no-cache-dir ansible
+RUN sudo python3 -m ensurepip --upgrade && \
+    sudo pip3 install --no-cache-dir ansible
 
 # Verify Ansible installation (optional, for debugging)
 RUN ansible --version
