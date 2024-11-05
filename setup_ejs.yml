@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: install node.js
-      ansible.builtin.dnf:
+      dnf:
         name: nodejs
         state: present
         update_cache: yes
