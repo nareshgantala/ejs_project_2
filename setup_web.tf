@@ -13,16 +13,15 @@ output "instance_public_ip" {
   value = data.aws_instances.existing_instance.public_ips[0]
 }
 
-resource "null_resource" "ansible_playbook" {
+resource "null_resource" "docker_setup" {
   provisioner "local-exec" {
     command = <<-EOF
-      sshpass -p "DevOps321" ssh -o StrictHostKeyChecking=no centos@${data.aws_instances.existing_instance.public_ips[0]} << 'EOSSH'
-        cd /home/centos/ejs_project_2
-        docker build -t my-node-app .
-        docker run -d -p 3000:3000 my-node-app
-      EOSSH
+      cd /home/centos/app
+      docker build -t my-node-app .
+      docker run -d -p 3000:3000 my-node-app
     EOF
   }
 
+  # Ensure the provisioner runs after the instance data is fetched
   depends_on = [data.aws_instances.existing_instance]
 }
