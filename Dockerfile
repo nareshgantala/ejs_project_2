@@ -6,8 +6,8 @@ RUN sudo dnf install -y python38
 
 
 # Install Ansible via pip
-RUN sudo python3 -m ensurepip --upgrade && \
-    sudo pip3 install --no-cache-dir ansible
+RUN python3 -m ensurepip --upgrade && \
+    pip3 install --no-cache-dir ansible
 
 # Verify Ansible installation (optional, for debugging)
 RUN ansible --version
