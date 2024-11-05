@@ -16,7 +16,6 @@ output "instance_public_ip" {
 resource "null_resource" "docker_setup" {
   provisioner "local-exec" {
     command = <<-EOF
-      cd /home/centos/ejs_project_2
       docker build -t my-node-app .
       docker run -d -p 3000:3000 my-node-app
     EOF
