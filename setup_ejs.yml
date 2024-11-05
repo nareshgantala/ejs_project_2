@@ -28,7 +28,13 @@
     #   ansible.builtin.file:
     #     path: /home/centos/ejs_project_2
     #     state: directory
-    #     mode: u+rwx,g+rwx,o+rwx
+    #     mode: u+rwx,g+rwx,o+rw
+    - name: Install npm (Debian-based systems)
+      apt:
+        name: npm
+        state: present
+
+  
 
     - name: Install Express and EJS
       npm:
