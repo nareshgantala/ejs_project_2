@@ -6,6 +6,7 @@
       ansible.builtin.dnf:
         name: nodejs
         state: present
+        update_cache: yes
 
     # - name: Create a project directory if it does not exist
     #   ansible.builtin.file:
