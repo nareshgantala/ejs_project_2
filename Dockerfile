@@ -1,5 +1,5 @@
 # Use a base image that supports Ansible installation
-FROM ansible/ansible
+FROM ansible/ansible:default
 
 # Set the working directory for the playbook
 WORKDIR /home/centos/ejs_project_2
