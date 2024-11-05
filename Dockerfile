@@ -1,13 +1,13 @@
 # Use a base image that supports Ansible installation
-FROM centos:8
+FROM python:3.12.7-bullseye
 
-# Install Python 3 and pip
-RUN dnf install -y python38
+
 
 
 # Install Ansible via pip
-RUN python3 -m ensurepip --upgrade && \
-    pip3 install --no-cache-dir ansible
+RUN pip3.12 install ansible ansible-core==2.16 botocore boto3 python-jenkins
+
+
 
 # Verify Ansible installation (optional, for debugging)
 RUN ansible --version
