@@ -1,9 +1,5 @@
 # Use a base image that supports Ansible installation
-FROM centos:latest
-
-# Install EPEL repository and Ansible
-RUN yum install python3.12-devel python3.12-pip -y && \
-pip3.12 install ansible ansible-core==2.16 botocore boto3 python-jenkins
+FROM ansible/ansible
 
 # Set the working directory for the playbook
 WORKDIR /home/centos/ejs_project_2
